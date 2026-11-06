@@ -1,33 +1,32 @@
-예시 리드미입니다.
-[.github/CODEOWNERS](.github/CODEOWNERS)의 octocat을 실제 팀원으로 수정해주세요.
-프로젝트에 맞춰 아래 내용을 작성하고 이 문구와 각 설명을 삭제해주세요.
-리드미는 아래 양식과 관계 없이 팀 색깔에 맞춰 자유롭게 꾸며주셔도 됩니다.
+# React + TypeScript + Vite
 
-# 프로젝트 이름으로 수정해주세요
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-프로젝트의 목적, 대상 사용자, 활용 상황 등을 설명해 주세요.
+Currently, two official plugins are available:
 
-## 요구 사항
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-필요한 런타임, 도구, 버전 및 외부 서비스를 적어 주세요.
+## React Compiler
 
-## 시작하기
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-저장소 다운로드부터 의존성 설치까지 실제 명령어를 순서대로 작성하세요.
-환경 변수가 필요하면 변수 이름과 용도를 적어 주세요.
-실행 명령어와 최소 사용 예시를 작성하세요.
-UI가 있는 경우 스크린샷을 추가해도 좋습니다.
+## Expanding the Oxlint configuration
 
-## 팀 소개
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
 
-팀원 수에 맞게 열을 추가하거나 삭제하고, 이름과 역할을 수정하세요.
-프로필 이미지와 깃허브 링크를 각 팀원의 실제 주소로 교체하세요.
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
+```
 
-| <img src="https://github.com/octocat.png" width="100"> | <img src="https://github.com/octocat.png" width="100"> | <img src="https://github.com/octocat.png" width="100"> | <img src="https://github.com/octocat.png" width="100"> |
-| :---: | :---: | :---: | :---: |
-| [팀원 1](https://github.com/octocat) | [팀원 2](https://github.com/octocat) | [팀원 3](https://github.com/octocat) | [팀원 4](https://github.com/octocat) |
-| 역할 | 역할 | 역할 | 역할 |
-
-## 라이선스
-
-프로젝트의 라이선스를 선택한 뒤 LICENSE 파일을 추가하고 이 섹션에 연결하세요.
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
