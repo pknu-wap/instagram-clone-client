@@ -41,7 +41,9 @@ function App() {
         ) : error ? (
           <div role="alert">
             <p>게시물을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>
-            <button type="button" onClick={retry}>다시 시도</button>
+            <button type="button" onClick={retry}>
+              다시 시도
+            </button>
           </div>
         ) : posts.length === 0 ? (
           <p role="status">아직 게시물이 없습니다.</p>

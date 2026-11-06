@@ -1,7 +1,7 @@
 ---
-name: "기능 제안"
-about: "새로운 기능이나 기존 기능의 개선을 제안해 주세요."
-title: ""
+name: '기능 제안'
+about: '새로운 기능이나 기존 기능의 개선을 제안해 주세요.'
+title: ''
 labels: [enhancement]
 assignees: []
 ---

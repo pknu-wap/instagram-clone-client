@@ -1,7 +1,7 @@
 ---
-name: "버그 신고"
-about: "예상과 다르게 동작하는 문제를 알려 주세요."
-title: ""
+name: '버그 신고'
+about: '예상과 다르게 동작하는 문제를 알려 주세요.'
+title: ''
 labels: [bug]
 assignees: []
 ---
