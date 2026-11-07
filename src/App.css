@@ -50,3 +50,40 @@
 .feed button:hover {
   background: #00548c;
 }
+
+.post-form {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  background: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+}
+.post-form label {
+  font-weight: 600;
+}
+.post-form textarea {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  border: 1px solid #767676;
+  border-radius: 6px;
+}
+.post-form textarea:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+.post-form button {
+  justify-self: end;
+}
+.feed button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.post-form p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}

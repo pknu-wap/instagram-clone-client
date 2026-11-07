@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { getPosts, type Post } from './api/posts'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { createPost, getPosts, type Post } from './api/posts'
 import './App.css'
 
 function App() {
@@ -7,6 +7,39 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [attempt, setAttempt] = useState(0)
+  const [content, setContent] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState('')
+  const [saveSuccess, setSaveSuccess] = useState(false)
+  const submitting = useRef(false)
+
+  async function submitPost(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (submitting.current) return
+    setSaveError('')
+    setSaveSuccess(false)
+    if (!content.trim()) {
+      setSaveError('본문을 입력해 주세요.')
+      return
+    }
+    submitting.current = true
+    setSaving(true)
+    try {
+      await createPost(import.meta.env.VITE_API_BASE_URL ?? '', content)
+      setContent('')
+      setSaveSuccess(true)
+      retry()
+    } catch (error) {
+      setSaveError(
+        error instanceof Error
+          ? error.message
+          : '게시물을 저장하지 못했습니다.',
+      )
+    } finally {
+      submitting.current = false
+      setSaving(false)
+    }
+  }
 
   useEffect(() => {
     const controller = new AbortController()
@@ -36,6 +69,33 @@ function App() {
       <header className="site-header">Instagram</header>
       <main className="feed">
         <h1>게시물</h1>
+        <form className="post-form" onSubmit={submitPost} aria-busy={saving}>
+          <label htmlFor="post-content">새 게시물</label>
+          <textarea
+            id="post-content"
+            value={content}
+            onChange={(event) => {
+              setContent(event.target.value)
+              setSaveError('')
+              setSaveSuccess(false)
+            }}
+            rows={4}
+            required
+            disabled={saving}
+            aria-invalid={Boolean(saveError)}
+            aria-describedby={saveError ? 'save-error' : undefined}
+            placeholder="어떤 이야기를 나누고 싶나요?"
+          />
+          <button type="submit" disabled={saving}>
+            {saving ? '게시 중…' : '게시하기'}
+          </button>
+          {saveError && (
+            <p id="save-error" role="alert">
+              {saveError}
+            </p>
+          )}
+          {saveSuccess && <p role="status">게시물이 등록되었습니다.</p>}
+        </form>
         {loading ? (
           <p role="status">게시물을 불러오는 중입니다.</p>
         ) : error ? (
